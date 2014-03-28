@@ -7,19 +7,34 @@
  * The general usage for this script is as follows:
  * 
  * !spellhelp
+ *  This command displays the possible options available with this script.
  * 
  * !spellsearch <search string>
+ *  This command returns the spells available (as defined in spells.js) 
+ *  with names that contain the search string.
  * 
  * !spellinfo <spell name>
+ *  This command whispers the full spell information for the given spell.
  * 
  * !spellshow <spell name>
- * 
- * !spellcast <spell name> [,optional arguments]
+ *  This command broadcasts the full spell information for the given spell.
  * 
  * !spellorb
+ *  This command requires the player to speak as a character with a linked
+ *  token. It creates a new token called a "spellorb" that is associated with
+ *  the character. The spellorb is used to position spells that are cast with
+ *  the !spellcast command. If the !spellorb command is issued by a character
+ *  that has already been assigned a spellorb, the existing spellorb generates
+ *  a ping so that the player can locate it on the screen.
  *
+ * !spellcast <spell name> [,optional arguments]
+ *  This command requires the player to speak as a character with a linked
+ *  token, and it also requires that character to have a spellorb. When it
+ *  is executed, the spell's effects are rendered in Roll20. (This functionality
+ *  is still being developed.)
+ * 
  *******************************************************************************
- * Copyright (C) 2014  Aaron Garrett
+ * Copyright (C) 2014  Aaron Garrett (aaron.lee.garrett@gmail.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -711,25 +726,7 @@ inspired.registerSpellorb = function(characterId) {
 
 on("chat:message", function(msg) {
     if(msg.type != "api") return;
-    if(msg.content.contains("!spellorb")) {
-        var character = filterObjs(function(obj) {
-                            if((obj.get("_type") == "character") && (obj.get("name") == msg.who) &&
-                               obj.get("controlledby").contains(msg.playerid)) return true;
-                            else return false;
-                          })[0];
-        if(!_.isUndefined(character)) {
-            var returnMessage = inspired.registerSpellorb(character.get("_id"));
-            sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " " + returnMessage);
-            var spellorb = inspired.getSpellorb(character.get("_id"));
-            if(spellorb !== null) {
-                sendPing(spellorb.get("left"), spellorb.get("top"), spellorb.get("_pageid"));
-            }
-        }
-        else {
-            sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " You must cast spells as a character, not as a player.");
-        }
-    }
-    else if(msg.content.contains("!spellhelp")) {
+    if(msg.content.contains("!spellhelp")) {
         var help = "<b>Spellcraft Help</b><br/>There are five main functions available through the spellcraft module. ";
         help += "These functions allow the user to search for and display information about spells, as well as cast ";
         help += "spells with the use of a created spellorb to help target spell effects.";
@@ -737,8 +734,8 @@ on("chat:message", function(msg) {
         help += "<dt>!spellsearch</dt><dd>takes a search key string and returns all spell names that contain that search key<br/><code>!spellsearch light wounds</code></dd>";
         help += "<dt>!spellinfo</dt><dd>takes a spell name and whispers its information to you<br/><code>!spellinfo cure light wounds</code></dd>";
         help += "<dt>!spellshow</dt><dd>takes a spell name and displays its information to everyone<br/><code>!spellshow cure light wounds</code></dd>";
-        help += "<dt>!spellcast</dt><dd>takes a spell name (and possible additional arguments) and attempts to apply its effects to the game map (requires caster to have a spellorb)<br/><code>!spellcast fireball</code></dd>";
-        help += "<dt>!spellorb</dt><dd>takes no arguments and supplies user with a spellorb (if one does not already exist) that is used for positioning spells<br/><code>!spellorb</code></dd>";
+        help += "<dt>!spellorb</dt><dd>takes no arguments and supplies caster with a spellorb (or helps locate an existing spellorb) that is used for positioning spells<br/><code>!spellorb</code></dd>";
+        help += "<dt>!spellcast</dt><dd>takes a spell name (and possible additional arguments) and attempts to apply its effects to the Roll20 system (requires caster to have a spellorb)<br/><code>!spellcast fireball</code></dd>";
         help += "</dl>";
         sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " <br/>" + help);
     }
@@ -789,6 +786,24 @@ on("chat:message", function(msg) {
                          "<i>greater</i>, or </i>mass</i> place those modifiers at the end (for instance, " +
                          "<i>confusion lesser</i> or <i>cure serious wounds mass</i>).");
             }
+        }
+    }
+    else if(msg.content.contains("!spellorb")) {
+        var character = filterObjs(function(obj) {
+                            if((obj.get("_type") == "character") && (obj.get("name") == msg.who) &&
+                               obj.get("controlledby").contains(msg.playerid)) return true;
+                            else return false;
+                          })[0];
+        if(!_.isUndefined(character)) {
+            var returnMessage = inspired.registerSpellorb(character.get("_id"));
+            sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " " + returnMessage);
+            var spellorb = inspired.getSpellorb(character.get("_id"));
+            if(spellorb !== null) {
+                sendPing(spellorb.get("left"), spellorb.get("top"), spellorb.get("_pageid"));
+            }
+        }
+        else {
+            sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " You must cast spells as a character, not as a player.");
         }
     }
     else if(msg.content.contains("!spellcast ")) {

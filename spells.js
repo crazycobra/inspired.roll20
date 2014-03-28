@@ -10,7 +10,7 @@
  * RPG, and it serves as a database that can be used by other scripts.
  *
  *******************************************************************************
- * Copyright (C) 2014  Aaron Garrett
+ * Copyright (C) 2014  Aaron Garrett (aaron.lee.garrett@gmail.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
