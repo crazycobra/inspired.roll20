@@ -45,7 +45,7 @@ if(!('contains' in String.prototype)) {
         return ''.indexOf.call(this, str, startIndex) !== -1;
     };
 }
-if(!('!hashCode' in String.prototype)) {
+if(!('hashCode' in String.prototype)) {
     String.prototype.hashCode = function(){
         var hash = 0, i, char;
         if(this.length == 0) return hash;
