@@ -825,7 +825,7 @@ on("chat:message", function(msg) {
                     var wasCast = spell.cast(spellorb, args);
                     if(wasCast) {
                         sendChat(msg.who, "/em " + "casts " + spell.name);
-                        sendChat(msg.who, "<br/>" + spell.toString());
+                        //sendChat(msg.who, "<br/>" + spell.toString());
                     }
                     else {
                         sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " <i>" + spell.name + "</i> could not be cast.");

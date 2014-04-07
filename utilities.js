@@ -31,6 +31,18 @@ if(!('contains' in String.prototype)) {
 
 var inspired = inspired || {};
 
+// The inspired.gmlist variable contains the list of all player 
+// _d20userid values that serve as GMs in the campaign. This variable 
+// must be updated for your particular campaign.
+state["inspired.gmlist"] = ["104278"];
+
+
+// This function return true if the playerid belongs to a player listed as a GM
+// (as defined by the "inspired.gmlist" state variable) and false otherwise.
+inspired.isGM = function(playerid) {
+    return _.contains(state["inspired.gmlist"], getObj("player", playerid).get("_d20userid"));
+}
+
 // This function returns true if the object obj is controlled by the player
 // with playerid. The reason a utility function is required is because Roll20
 // does not automatically check the controlledby status of tokens linked to

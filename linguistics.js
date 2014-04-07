@@ -8,6 +8,9 @@
  * 
  * !speak <language> <message>
  * 
+ * Example: 
+ * !speak elven this is an elven message
+ * 
  * The <language> must exist in the predefined set stored in 
  * state["inspired.languages"]. The speaker must be a character (so the player 
  * must choose a character to "speak as" for this use), and that character must 

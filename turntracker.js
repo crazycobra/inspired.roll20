@@ -58,11 +58,6 @@ if(!('contains' in String.prototype)) {
 
 var inspired = inspired || {};
 
-// The inspired.gmlist variable contains the list of all player 
-// _d20userid values that serve as GMs in the campaign. This variable 
-// must be updated for your particular campaign.
-state["inspired.gmlist"] = ["104278"];
-
 // This variable holds everything we need in order to track the participants
 // through the rounds.
 // * round: an integer representing the current round of combat
@@ -91,8 +86,7 @@ inspired.inCombat = function() {
 
 on("chat:message", function(msg) {
     if(msg.type != "api") return;
-    if(msg.content.contains("!begincombat") && !inspired.inCombat() && 
-       _.contains(state["inspired.gmlist"], getObj("player", msg.playerid).get("_d20userid"))) {
+    if(msg.content.contains("!begincombat") && !inspired.inCombat() && inspired.isGM(msg.playerid)) {
         // If we receive a "!begincombat" command, if we're not already involved
         // in combat, and if the sender of the command is a GM, then we should
         // initialize the tracker information.
@@ -119,8 +113,7 @@ on("chat:message", function(msg) {
             Campaign().set("initiativepage", Campaign().get("playerpageid"));
         }
     }
-    else if(msg.content.contains("!endcombat") && inspired.inCombat() &&
-            _.contains(state["inspired.gmlist"], getObj("player", msg.playerid).get("_d20userid"))) {
+    else if(msg.content.contains("!endcombat") && inspired.inCombat() && inspired.isGM(msg.playerid)) {
         sendChat(msg.who, "/desc The combat is over.");
         state["inspired.turntracker"]["round"] = 0;
         state["inspired.turntracker"]["top"] = "";
@@ -136,8 +129,7 @@ on("chat:message", function(msg) {
         else turnorder = JSON.parse(Campaign().get("turnorder"));
         if(_.size(turnorder) > 0 && inspired.inCombat()) {
             var topToken = getObj("graphic", turnorder[0]["id"]);
-            if(_.contains(state["inspired.gmlist"], getObj("player", msg.playerid).get("_d20userid")) || 
-               inspired.isControlledBy(topToken, msg.playerid)) {
+            if(inspired.isGM(msg.playerid) || inspired.isControlledBy(topToken, msg.playerid)) {
                 var front = turnorder.shift();
                 state["inspired.turntracker"]["turns"][front["id"]].push(state["inspired.turntracker"]["round"]);
                 turnorder.push(front);
@@ -166,8 +158,7 @@ on("chat:message", function(msg) {
             s += "<table><thead><th>Combatant</th><th>Turns Taken</th></thead><tbody>";
             _.each(state["inspired.turntracker"]["turns"], function(obj, id) {
                 var tok = getObj("graphic", id);
-                if(_.contains(state["inspired.gmlist"], getObj("player", msg.playerid).get("_d20userid")) || 
-                   inspired.isControlledBy(tok, msg.playerid)) {
+                if(inspired.isGM(msg.playerid) || inspired.isControlledBy(tok, msg.playerid)) {
                     var name = "";
                     if(tok.get("name").length > 0) name = tok.get("name");
                     else name = tok.get("_id");
