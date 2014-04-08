@@ -188,6 +188,24 @@ inspired.loadMonsterAbilities = function(monster, charid) {
     });
 }
 
+inspired.createMonster = function(token, monsterName, monster) {
+    // Create the character.
+    var character = createObj("character", {
+        avatar: token.get("imgsrc"),
+        name: monsterName,
+        bio: monster["description"],
+        archived: false
+    });
+    var cid = character.get("_id");
+    token.set("represents", cid);
+    token.set("name", monsterName);
+    token.set("showname", true);
+    token.set("showplayers_name", true);
+    var hpid = inspired.loadMonsterAttributes(monster, cid);
+    token.set("bar1_link", hpid);
+    inspired.loadMonsterAbilities(monster, cid);
+}
+
 on("chat:message", function(msg) {
     if(msg.type != "api") return;
     if(msg.content.contains("!beastcraft ") && inspired.isGM(msg.playerid)) {
@@ -198,21 +216,7 @@ on("chat:message", function(msg) {
             _.each(msg.selected, function(elt, index) {
                 var token = getObj("graphic", elt["_id"]);
                 if(token.get("subtype") == "token") {
-                    // Create the character.
-                    var character = createObj("character", {
-                        avatar: token.get("imgsrc"),
-                        name: monsterName,
-                        bio: monster["description"],
-                        archived: false
-                    });
-                    var cid = character.get("_id");
-                    token.set("represents", cid);
-                    token.set("name", monsterName);
-                    token.set("showname", true);
-                    token.set("showplayers_name", true);
-                    var hpid = inspired.loadMonsterAttributes(monster, cid);
-                    token.set("bar1_link", hpid);
-                    inspired.loadMonsterAbilities(monster, cid);
+                    inspired.createMonster(token, monsterName, monster);
                     numCreated++;
                 }
             });
