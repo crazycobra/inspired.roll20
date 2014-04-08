@@ -57,6 +57,10 @@ if(!('contains' in String.prototype)) {
     };
 }
 
+
+var inspired = inspired || {};
+
+
 on("chat:message", function(msg) {
     if(msg.type != "api") return;
     if(msg.content.contains("!blindroll ")) {
@@ -67,6 +71,7 @@ on("chat:message", function(msg) {
         }
     }
 });
+
 
 on("chat:message", function(msg) {
     if(msg.type != "api") return;

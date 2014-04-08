@@ -29,12 +29,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
- 
-on("change:token", function(obj) {
+var inspired = inspired || {};
+
+on("change:token:bar1_value", function(obj) {
     // Only use this for creatures the GM controls.
     var gmControlled = false;
     var controllers = inspired.getControlledBy(obj);
     if(_.size(controllers) > 0) {
+        controllers = controllers.split(",");
         _.each(controllers, function(elt) {
             if(inspired.isGM(elt)) gmControlled = true;
         });

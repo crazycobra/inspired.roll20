@@ -40,7 +40,13 @@ state["inspired.gmlist"] = ["104278"];
 // This function return true if the playerid belongs to a player listed as a GM
 // (as defined by the "inspired.gmlist" state variable) and false otherwise.
 inspired.isGM = function(playerid) {
-    return _.contains(state["inspired.gmlist"], getObj("player", playerid).get("_d20userid"));
+    var obj = getObj("player", playerid);
+    if(!_.isUndefined(obj)) {
+        return _.contains(state["inspired.gmlist"], obj.get("_d20userid"));
+    }
+    else {
+        return false;
+    }
 }
 
 // This function returns true if the object obj is controlled by the player

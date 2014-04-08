@@ -58,6 +58,8 @@ if(!('hashCode' in String.prototype)) {
     };
 }
 
+var inspired = inspired || {};
+
 
 state["inspired.languages"] = ["aboleth", "abyssal", "aklo", "aquan", "auran",
                                "boggard", "celestial", "cyclops", "darkfolk",
