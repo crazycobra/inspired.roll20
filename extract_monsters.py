@@ -238,7 +238,7 @@ def get_from_html(s):
     
     def remove_tags(s, tags=None):
         if tags is None:
-            tags = ['h5', 'hr', 'div', 'i', 'p', 'h4']
+            tags = ['h5', 'hr', 'div', 'i', 'p', 'h4', 'html', 'body']
         soup = BeautifulSoup(s)
         for tag in tags: 
             for match in soup.findAll(tag):
@@ -432,6 +432,8 @@ def get_from_html(s):
     
 if __name__ == '__main__':
     with open('monster_bestiary_partial.csv') as mfile:
+        groupings = [3, 6, 9, 12, 15, 30]
+        groups = [{} for _ in range(len(groupings))]
         mcsv = csv.DictReader(mfile)
         monsters = {}
         for row in mcsv:
@@ -473,16 +475,25 @@ if __name__ == '__main__':
                 monster.update(others)
                 
                 monsters[name] = monster
+                
+                for i, g in enumerate(groupings):
+                    cr = eval(monsters[name]['cr']+'.0')
+                    if cr <= g:
+                        groups[i][name] = monsters[name]
+                        break
                 print(name)
         print('--------------------------------------------')
-        for name in monsters:
-            if '/' in ''.join([m['special'] for m in monsters[name]['melee']]):
-                print(name)
-            if '/' in ''.join([m['special'] for m in monsters[name]['ranged']]):
-                print(name)
+        for group in groups:
+            print(len(group))
         
         print('+++++++++++++++++++++++++++++++++++++++++++++')
         print(len(monsters))
+        for gn, g in zip(groupings, groups):
+            with open('bestiary{:02d}.js'.format(gn), 'w') as bfile:
+                bfile.write('state["inspired.BESTIARY"] =\n')
+                bfile.write(json.dumps(g, indent=3, separators=[',', ': '], sort_keys=True))
+                bfile.write(';')
+        
         with open('bestiary.js', 'w') as bfile:
             bfile.write('state["inspired.BESTIARY"] =\n')
             bfile.write(json.dumps(monsters, indent=3, separators=[',', ': '], sort_keys=True))
