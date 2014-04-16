@@ -199,8 +199,8 @@ inspired.createMonster = function(token, monsterName, monster) {
     var cid = character.get("_id");
     token.set("represents", cid);
     token.set("name", monsterName);
-    token.set("showname", true);
-    token.set("showplayers_name", true);
+    token.set("showname", false);
+    token.set("showplayers_name", false);
     var hpid = inspired.loadMonsterAttributes(monster, cid);
     token.set("bar1_link", hpid);
     inspired.loadMonsterAbilities(monster, cid);
