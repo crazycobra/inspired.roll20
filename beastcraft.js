@@ -74,33 +74,37 @@ inspired.loadMonsterAbilities = function(monster, charid) {
         else return "";
     }
     specialString = function(specialText) {
-        return specialText;
+        return inspired.rollify(specialText);
     }
     attackString = function(monsterName, attack) {
-        var tableStart = "<table><thead><th>Atk</th><th>Dmg</th><th>Special</th></thead><tbody>";
+        var tableStart = "<table><thead><th><small>Atk</small></th><th><small>Dmg</small></th><th><small>Special</small></th></thead><tbody>";
         var tableEnd = "</tbody></table>";
-        var fullAttack = "<br/><b><big>" + monsterName + " attacks...</big></b><br/>";
+        var description = "/emas " + monsterName + " attacks @{target|character_name} (AC @{target|AC})...\n\n";
+        var fullAttack = description;
         var primaryAttack = "";
+        var allAttacks = [];
         _.each(attack, function(elt, index) {
             var header = "<small>" + elt["weapon"] + " ";
             if(elt["critmin"] < 20) header += elt["critmin"] + "-20";
             header += "/x" + elt["critmult"] + "</small>";
             fullAttack += header + tableStart;
+            var count = 1;
             for(var i = 0; i < elt["amount"]; i++) {
                 _.each(elt["bonus"], function(b, j) {
-                    fullAttack += "<tr><td>[[1d20+" + b + "]]</td><td>[[" + elt["damage"] + "]]</td><td>" + specialString(elt["special"]) + "</td></tr>";
-                    if(index == 0 && j == 0) {
-                        primaryAttack = fullAttack + tableEnd;
-                    }
+                    var tableRow = "<tr><td>[[1d20+" + b + "]]</td><td>[[" + elt["damage"] + "]]</td><td>" + specialString(elt["special"]) + "</td></tr>"; 
+                    var attack = description + header + tableStart + tableRow + tableEnd;
+                    fullAttack += tableRow;
+                    allAttacks.push({"name": elt["weapon"] + " " + count, "attack": attack});
+                    count += 1;
                 });
             }
             fullAttack += tableEnd + "<br/>";
         });
-        return [primaryAttack, fullAttack];
+        return [allAttacks, fullAttack];
     }
     
-    var emstr = "/emas @{selected|token_name}";
     var monsterName = "@{selected|token_name}";
+    var emstr = "/emas " + monsterName;
     
     // Load initiative...
     createObj("ability", {
@@ -125,56 +129,66 @@ inspired.loadMonsterAbilities = function(monster, charid) {
     });
     
     // Load skills...
+    var combatSkills = ["acrobatics", "bluff", "escape artist", "fly", "intimidate", "perception"]; 
     _.each(monster["skills"], function(obj, key) {
+        var ta = false;
+        if(_.contains(combatSkills, key)) ta = true;
         var c = circumstantialString(obj["circumstantial"], "on");
         if(_.size(c) > 0) c = " " + c;
         createObj("ability", {
             name: key,
             description: "",
             action: emstr + " " + key + " [[1d20 + " + obj["bonus"] + "]]" + c,
-            istokenaction: true,
+            istokenaction: ta,
             characterid: charid
         });
     });
     
-    var tableStart = "<table><thead><th>Atk</th><th>Dmg</th><th>Special</th></thead><tbody>";
-    var tableEnd = "</tbody></table>";
-    
     // Load melee attacks...
+    var specialAttacks = "";
+    if(_.size(monster["specialattacks"]) > 0) specialAttacks = "\n/w gm <small>special attacks<ul><li>" + monster["specialattacks"].join("</li><li>") + "</li></ul></small>";
     if(_.size(monster["melee"]) > 0) {
-        var melee = attackString(monsterName, monster["melee"]);
-        createObj("ability", {
-            name: "primary melee",
-            description: "",
-            action: melee[0],
-            istokenaction: true,
-            characterid: charid
-        });
+        var attack = attackString(monsterName, monster["melee"]);
         createObj("ability", {
             name: "full melee",
             description: "",
-            action: melee[1],
+            action: attack[1] + specialAttacks,
             istokenaction: true,
             characterid: charid
+        });
+        _.each(attack[0], function(obj, index) {
+            var pstr = "";
+            if(index == 0) pstr = " [primary]";
+            createObj("ability", {
+                name: "melee (" + obj["name"] + ")" + pstr,
+                description: "",
+                action: obj["attack"] + specialAttacks,
+                istokenaction: true,
+                characterid: charid
+            });
         });
     }
     
     // Load ranged attacks...
     if(_.size(monster["ranged"]) > 0) {
-        var ranged = attackString(monsterName, monster["ranged"]);
-        createObj("ability", {
-            name: "primary ranged",
-            description: "",
-            action: ranged[0],
-            istokenaction: true,
-            characterid: charid
-        });
+        var attack = attackString(monsterName, monster["ranged"]);
         createObj("ability", {
             name: "full ranged",
             description: "",
-            action: ranged[1],
+            action: attack[1] + specialAttacks,
             istokenaction: true,
             characterid: charid
+        });
+        _.each(attack[0], function(obj, index) {
+            var pstr = "";
+            if(index == 0) pstr = " [primary]";
+            createObj("ability", {
+                name: "ranged (" + obj["name"] + ")" + pstr,
+                description: "",
+                action: obj["attack"] + specialAttacks,
+                istokenaction: true,
+                characterid: charid
+            });
         });
     }
     

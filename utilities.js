@@ -77,3 +77,23 @@ inspired.getControlledBy = function(obj) {
     else return "";
 }
 
+// This function parses a string and returns a new string with any dice rolls
+// converted to inline roll commands (grouped in double-square-brackets).
+// For example, the string "2d6+1d4+3 fire damage" would be converted to
+// "[[2d6+1d4+3]] fire damage" and that new string would be returned.
+inspired.rollify = function(str) {
+    var re = /(\d+d\d+)((\s*[\+\-]\s*\d+d\d+)|(\s*[\+\-]\s*\d))*/g;
+    var rstr = "";
+    var curr = 0;
+    while(match = re.exec(str)) {
+        var preroll = str.substring(curr, match.index);
+        var roll = str.substring(match.index, re.lastIndex);
+        rstr += preroll;
+        rstr += "[[";
+        rstr += roll;
+        rstr += "]]";
+        curr = re.lastIndex;
+    }
+    rstr += str.substring(curr);
+    return rstr;
+}
