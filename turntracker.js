@@ -130,6 +130,7 @@ on("chat:message", function(msg) {
         if(_.size(turnorder) > 0 && inspired.inCombat()) {
             var topToken = getObj("graphic", turnorder[0]["id"]);
             if(inspired.isGM(msg.playerid) || inspired.isControlledBy(topToken, msg.playerid)) {
+                sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " You have ended your turn.");
                 var front = turnorder.shift();
                 state["inspired.turntracker"]["turns"][front["id"]].push(state["inspired.turntracker"]["round"]);
                 turnorder.push(front);
