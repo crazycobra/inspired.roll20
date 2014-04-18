@@ -36,25 +36,37 @@ if(!('contains' in String.prototype)) {
 var inspired = inspired || {};
 
 inspired.loadMonsterAttributes = function(monster, charid) {
-    var attributes = {"initiative": monster["initiative"],
-                      "ac": monster["ac"]["normal"],
-                      "touch": monster["ac"]["touch"],
-                      "flat-footed": monster["ac"]["flat-footed"],
-                      "hp": monster["hp"],
-                      "fortitude": monster["saves"]["fortitude"]["bonus"],
-                      "reflex": monster["saves"]["reflex"]["bonus"],
-                      "will": monster["saves"]["will"]["bonus"]};
-    var hpid = "";
+    mod = function(ability) { return Math.floor((ability - 10)/2); }
+    var attributes = {"initiative": [monster["initiative"]],
+                      "ac": [monster["ac"]["normal"]],
+                      "touch": [monster["ac"]["touch"]],
+                      "flat-footed": [monster["ac"]["flat-footed"]],
+                      "hp": [monster["hp"], monster["hp"]],
+                      "fortitude": [monster["saves"]["fortitude"]["bonus"]],
+                      "reflex": [monster["saves"]["reflex"]["bonus"]],
+                      "will": [monster["saves"]["will"]["bonus"]], 
+                      "strength": [mod(monster["abilityscores"]["str"]), monster["abilityscores"]["str"]],
+                      "dexterity": [mod(monster["abilityscores"]["dex"]), monster["abilityscores"]["dex"]],
+                      "constitution": [mod(monster["abilityscores"]["con"]), monster["abilityscores"]["con"]],
+                      "intelligence": [mod(monster["abilityscores"]["int"]), monster["abilityscores"]["int"]],
+                      "wisdom": [mod(monster["abilityscores"]["wis"]), monster["abilityscores"]["wis"]],
+                      "charisma": [mod(monster["abilityscores"]["cha"]), monster["abilityscores"]["cha"]],
+                      "cmb": [monster["cmb"]["bonus"], monster["cmb"]["special"]],
+                      "cmd": [monster["cmd"]["bonus"], monster["cmd"]["special"]],
+                      "sr": [monster["sr"]["value"], monster["sr"]["versus"]],
+                      "fasthealing": [monster["fasthealing"]["amount"], monster["fasthealing"]["special"]]
+    };
     _.each(attributes, function(obj, key) {
+        var c = obj[0];
+        var m = "";
+        if(_.size(obj) > 1) m = obj[1];
         var attrib = createObj("attribute", {
             name: key,
-            current: obj,
-            max: obj,
+            current: c,
+            max: m,
             characterid: charid
         });
-        if(key == "hp") hpid = attrib.get("_id");
     });
-    return hpid;
 }
 
 inspired.loadMonsterAbilities = function(monster, charid) {
@@ -215,9 +227,26 @@ inspired.createMonster = function(token, monsterName, monster) {
     token.set("name", monsterName);
     token.set("showname", false);
     token.set("showplayers_name", false);
-    var hpid = inspired.loadMonsterAttributes(monster, cid);
-    token.set("bar1_link", hpid);
+    inspired.loadMonsterAttributes(monster, cid);
+    var hp = findObjs({
+        _type: "attribute", 
+        name: "hp",
+        characterid: cid
+    })[0];
+    token.set("bar1_link", hp.get("_id"));
+    var ac = findObjs({
+        _type: "attribute", 
+        name: "ac",
+        characterid: cid
+    })[0];
+    token.set("bar2_link", ac.get("_id"));
     inspired.loadMonsterAbilities(monster, cid);
+    var sizes = {"fine": 0.5, "diminutive": 1, "tiny": 2.5, "small": 5, 
+                 "medium": 5, "large": 10, "huge": 15, "gargantuan": 20,
+                 "colossal": 30};
+    var size = distanceToPixels(sizes[monster["size"]]);
+    token.set("width", size);
+    token.set("height", size);
 }
 
 on("chat:message", function(msg) {
@@ -240,6 +269,8 @@ on("chat:message", function(msg) {
             }
             else {
                 sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " You created " + numCreated + " <i>" + monsterName + "</i>(s).");
+                var notes = "notes about the monster will go here";
+                sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " " + notes);
             }
         }
         else {

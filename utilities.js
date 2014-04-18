@@ -29,7 +29,36 @@ if(!('contains' in String.prototype)) {
     };
 }
 
+
 var inspired = inspired || {};
+
+/*-----------------------------------------------------------------------------*
+ *                          GENERIC FUNCTIONS
+ *-----------------------------------------------------------------------------*/
+// These function are simply stand-ins for the ones that are mentioned on the
+// Roll20 wiki but are still listed as "not implemented yet". When those are 
+// actually implemented, we should ideally be able to remove these.
+inspired.DISTANCE_PER_UNIT = 5;
+inspired.PIXELS_PER_UNIT = 70;
+
+distanceToPixels = function(distance) {
+    // In Pathfinder, this would convert feet to pixels.
+    return distance / inspired.DISTANCE_PER_UNIT * inspired.PIXELS_PER_UNIT;
+}
+pixelsToDistance = function(pixels) {
+    // In Pathfinder, this would convert pixels to feet.
+    return pixels / inspired.PIXELS_PER_UNIT * inspired.DISTANCE_PER_UNIT;
+}
+distanceToUnits = function(distance) {
+    // In Pathfinder, this would convert feet to squares.
+    return distance / inspired.DISTANCE_PER_UNIT;
+}
+unitsToDistance = function(units) {
+    // In Pathfinder, this would convert squares to feet.
+    return units * inspired.DISTANCE_PER_UNIT;
+}
+
+
 
 // The inspired.gmlist variable contains the list of all player 
 // _d20userid values that serve as GMs in the campaign. This variable 

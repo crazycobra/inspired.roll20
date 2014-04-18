@@ -68,33 +68,6 @@ var inspired = inspired || {};
 // It need only be a transparent image because the spellorb's aura will be 
 // the part that is seen by the player.
 inspired.SPELLORB = {"url": "https://s3.amazonaws.com/files.d20.io/images/1974569/ZHo2IwgEaM2P1JC1nf0Sbg/thumb.png?1380660503"};
-inspired.DISTANCE_PER_UNIT = 5;
-inspired.PIXELS_PER_UNIT = 70;
-
-
-/*-----------------------------------------------------------------------------*
- *                          GENERIC FUNCTIONS
- *-----------------------------------------------------------------------------*/
-// These function are simply stand-ins for the ones that are mentioned on the
-// Roll20 wiki but are still listed as "not implemented yet". When those are 
-// actually implemented, we should ideally be able to remove these.
-
-distanceToPixels = function(distance) {
-    // In Pathfinder, this would convert feet to pixels.
-    return distance / inspired.DISTANCE_PER_UNIT * inspired.PIXELS_PER_UNIT;
-}
-pixelsToDistance = function(pixels) {
-    // In Pathfinder, this would convert pixels to feet.
-    return pixels / inspired.PIXELS_PER_UNIT * inspired.DISTANCE_PER_UNIT;
-}
-distanceToUnits = function(distance) {
-    // In Pathfinder, this would convert feet to squares.
-    return distance / inspired.DISTANCE_PER_UNIT;
-}
-unitsToDistance = function(units) {
-    // In Pathfinder, this would convert squares to feet.
-    return units * inspired.DISTANCE_PER_UNIT;
-}
 
 
 /*-----------------------------------------------------------------------------*
