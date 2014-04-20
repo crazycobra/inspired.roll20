@@ -106,6 +106,21 @@ inspired.getControlledBy = function(obj) {
     else return "";
 }
 
+inspired.isControlledByGM = function(obj) {
+    var gmControlled = false;
+    var controllers = inspired.getControlledBy(obj);
+    if(_.size(controllers) > 0) {
+        controllers = controllers.split(",");
+        _.each(controllers, function(elt) {
+            if(inspired.isGM(elt)) gmControlled = true;
+        });
+    }
+    else {
+        gmControlled = true;
+    }
+    return gmControlled;
+}
+
 // This function parses a string and returns a new string with any dice rolls
 // converted to inline roll commands (grouped in double-square-brackets).
 // For example, the string "2d6+1d4+3 fire damage" would be converted to

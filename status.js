@@ -33,17 +33,7 @@ var inspired = inspired || {};
 
 on("change:token:bar1_value", function(obj) {
     // Only use this for creatures the GM controls.
-    var gmControlled = false;
-    var controllers = inspired.getControlledBy(obj);
-    if(_.size(controllers) > 0) {
-        controllers = controllers.split(",");
-        _.each(controllers, function(elt) {
-            if(inspired.isGM(elt)) gmControlled = true;
-        });
-    }
-    else {
-        gmControlled = true;
-    }
+    var gmControlled = inspired.isControlledByGM(obj);
     if(gmControlled) {
         var status_rules = [{barId: 1, barRatio: 0.5, status: "purplemarker"},
                             {barId: 1, barRatio: 0.2, status: "redmarker"},

@@ -60,12 +60,14 @@ inspired.loadMonsterAttributes = function(monster, charid) {
         var c = obj[0];
         var m = "";
         if(_.size(obj) > 1) m = obj[1];
-        var attrib = createObj("attribute", {
-            name: key,
-            current: c,
-            max: m,
-            characterid: charid
-        });
+        if(!_.isNaN(c) && !_.isNaN(m)) {
+            var attrib = createObj("attribute", {
+                name: key,
+                current: c,
+                max: m,
+                characterid: charid
+            });
+        }
     });
 }
 
@@ -115,8 +117,7 @@ inspired.loadMonsterAbilities = function(monster, charid) {
         return [allAttacks, fullAttack];
     }
     
-    var monsterName = "@{selected|token_name}";
-    var emstr = "/emas " + monsterName;
+    var emstr = "/emas " + monster["name"];
     
     // Load initiative...
     createObj("ability", {
@@ -160,7 +161,7 @@ inspired.loadMonsterAbilities = function(monster, charid) {
     var specialAttacks = "";
     if(_.size(monster["specialattacks"]) > 0) specialAttacks = "\n/w gm <small>special attacks<ul><li>" + monster["specialattacks"].join("</li><li>") + "</li></ul></small>";
     if(_.size(monster["melee"]) > 0) {
-        var attack = attackString(monsterName, monster["melee"]);
+        var attack = attackString(monster["name"], monster["melee"]);
         createObj("ability", {
             name: "full melee",
             description: "",
@@ -183,7 +184,7 @@ inspired.loadMonsterAbilities = function(monster, charid) {
     
     // Load ranged attacks...
     if(_.size(monster["ranged"]) > 0) {
-        var attack = attackString(monsterName, monster["ranged"]);
+        var attack = attackString(monster["name"], monster["ranged"]);
         createObj("ability", {
             name: "full ranged",
             description: "",
@@ -212,19 +213,88 @@ inspired.loadMonsterAbilities = function(monster, charid) {
         istokenaction: false,
         characterid: charid
     });
+    
+    // Load defensive abilities (to be whispered on hit point change)...
+    var da = "";
+    if(_.size(monster["defensiveabilities"]) > 0) {
+        da += "<b>Defensive Abilities</b><ul><li>" + monster["defensiveabilities"].join("</li><li>") + "</li></ul><br/>";
+    }
+    if(_.size(monster["dr"]) > 0) {
+        da += "<b>Damage Reduction</b><ul><li>" + monster["dr"].join("</li><li>") + "</li></ul><br/>";
+    }
+    if(monster["fasthealing"]["amount"] > 0) {
+        da += "<b>Fast Healing</b>: " + monster["fasthealing"]["amount"];
+        if(monster["fasthealing"]["special"].length > 0) {
+            da += " (" + monster["fasthealing"]["special"] + ")";
+        }
+        da += "<br/>";
+    }
+    if(monster["regeneration"]["amount"] > 0) {
+        da += "<b>Regeneration</b>: " + monster["regeneration"]["amount"];
+        if(monster["regeneration"]["overcome"].length > 0) {
+            da += " (overcome by " + monster["regeneration"]["overcome"] + ")";
+        }
+        da += "<br/>";
+    }
+    if(_.size(monster["Immunities"]) > 0) {
+        da += "<b>Immunities</b><ul><li>" + monster["immunities"].join("</li><li>") + "</li></ul><br/>";
+    }
+    if(_.size(monster["Resistances"]) > 0) {
+        da += "<b>Resistances</b><ul><li>" + monster["resistances"].join("</li><li>") + "</li></ul><br/>";
+    }
+    if(_.size(monster["weaknesses"]) > 0) {
+        da += "<b>Weaknesses</b><ul><li>" + monster["weaknesses"].join("</li><li>") + "</li></ul><br/>";
+    }
+    if(da.length > 0) {
+        da = "<small>Defense information for " + monster["name"] + "<br/>" + da + "</small>";
+        createObj("ability", {
+            name: "defenseinfo",
+            description: "",
+            action: "/w gm " + da,
+            istokenaction: false,
+            characterid: charid
+        });
+    }
+    
+    // Load per-turn abilities (to be whispered on the creature's turn)...
+    var pta = "";
+    if(monster["fasthealing"]["amount"] > 0) {
+        pta += "<b>Fast Healing</b>: " + monster["fasthealing"]["amount"];
+        if(monster["fasthealing"]["special"].length > 0) {
+            pta += " (" + monster["fasthealing"]["special"] + ")";
+        }
+        pta += "<br/>";
+    }
+    if(monster["regeneration"]["amount"] > 0) {
+        pta += "<b>Regeneration</b>: " + monster["regeneration"]["amount"];
+        if(monster["regeneration"]["overcome"].length > 0) {
+            pta += " (overcome by " + monster["regeneration"]["overcome"] + ")";
+        }
+        pta += "<br/>";
+    }
+    if(pta.length > 0) {
+        pta = "<small>Per-turn information for " + monster["name"] + "<br/>" + pta + "</small>";
+        createObj("ability", {
+            name: "perturninfo",
+            description: "",
+            action: "/w gm " + pta,
+            istokenaction: false,
+            characterid: charid
+        });
+    }
 }
 
-inspired.createMonster = function(token, monsterName, monster) {
+inspired.createMonster = function(token, monster) {
     // Create the character.
     var character = createObj("character", {
         avatar: token.get("imgsrc"),
-        name: monsterName,
+        name: monster["name"],
         bio: monster["description"],
         archived: false
     });
     var cid = character.get("_id");
     token.set("represents", cid);
-    token.set("name", monsterName);
+    token.set("name", monster["name"]);
     token.set("showname", false);
     token.set("showplayers_name", false);
     inspired.loadMonsterAttributes(monster, cid);
@@ -255,11 +325,12 @@ on("chat:message", function(msg) {
         var monsterName = msg.content.replace("!beastcraft ", "").trim().toLowerCase();
         if(monsterName in state["inspired.BESTIARY"]) {
             var monster = state["inspired.BESTIARY"][monsterName];
+            monster["name"] = monsterName;
             var numCreated = 0;
             _.each(msg.selected, function(elt, index) {
                 var token = getObj("graphic", elt["_id"]);
                 if(token.get("subtype") == "token") {
-                    inspired.createMonster(token, monsterName, monster);
+                    inspired.createMonster(token, monster);
                     numCreated++;
                 }
             });
@@ -268,9 +339,11 @@ on("chat:message", function(msg) {
                 sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " You must select at least one token to turn into a creature.");
             }
             else {
-                sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " You created " + numCreated + " <i>" + monsterName + "</i>(s).");
-                var notes = "notes about the monster will go here";
-                sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " " + notes);
+                var notes = "";
+                if(_.size(monster["auras"]) > 0) {
+                    notes += " This creature has the following auras: " + monster["auras"].join(",");
+                }
+                sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " You created " + numCreated + " <i>" + monsterName + "</i>(s)." + notes);
             }
         }
         else {
@@ -279,3 +352,72 @@ on("chat:message", function(msg) {
     }
 });
 
+
+on("change:token:bar1_value", function(obj) {
+    // Only use this for creatures the GM controls.
+    var gmControlled = inspired.isControlledByGM(obj);
+    if(gmControlled) {
+        // Display the defenseinfo ability if it exists...
+        if(obj.get("represents").length > 0) {
+            var c = getObj("character", obj.get("represents"));
+            var da = findObjs({_type: "ability", _characterid: c.get("_id"), name: "defenseinfo"});
+            if(_.size(da) > 0) {
+                sendChat("Roll20", da[0].get("action"));
+            }
+        }
+    }
+});
+
+
+on("chat:message", function(msg) {
+    if(msg.type != "api") return;
+    if(msg.content.contains("!eot")) {
+        // If we're not using the turn tracker, then our options are limited,
+        // so just ignore this option.
+        if(!_.isFunction(inspired.inCombat)) return;
+        // Only respond to these events if we're in combat.
+        if(!inspired.inCombat()) return;
+        var turnorder;
+        if(Campaign().get("turnorder") == "") turnorder = [];
+        else turnorder = JSON.parse(Campaign().get("turnorder"));
+        if(_.size(turnorder) > 0) {
+            var topid = turnorder[0]["id"];
+            // Is the top element controlled by the GM?
+            var token = getObj("graphic", topid);
+            if(inspired.isControlledByGM(token)) {
+                if(token.get("represents").length > 0) {
+                    var c = getObj("character", token.get("represents"));
+                    var pta = findObjs({_type: "ability", _characterid: c.get("_id"), name: "perturninfo"});
+                    if(_.size(pta) > 0) {
+                        sendChat("Roll20", pta[0].get("action"));
+                    }
+                }
+            }
+        }
+    }
+});
+   
+   
+on("change:campaign:turnorder", function(obj) {
+    // If we're not using the turn tracker, then our options are limited,
+    // so just ignore this option.
+    if(!_.isFunction(inspired.inCombat)) return;
+    // Only respond to these events if we're in combat.
+    if(!inspired.inCombat()) return;
+    if(obj.get("turnorder") == "") turnorder = [];
+    else turnorder = JSON.parse(obj.get("turnorder"));
+    if(_.size(turnorder) > 0) {
+        var topid = turnorder[0]["id"];
+        // Is the top element controlled by the GM?
+        var token = getObj("token", topid);
+        if(inspired.isControlledByGM(token)) {
+            if(token.get("represents").length > 0) {
+                var c = getObj("character", obj.get("represents"));
+                var pta = findObjs({_type: "ability", _characterid: c.get("_id"), name: "perturninfo"});
+                if(_.size(pta) > 0) {
+                    sendChat("Roll20", pta[0].get("action"));
+                }
+            }
+        }
+    }
+});
