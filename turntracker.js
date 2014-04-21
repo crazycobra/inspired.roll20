@@ -50,11 +50,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-if(!('contains' in String.prototype)) {
-    String.prototype.contains = function(str, startIndex) {
-        return ''.indexOf.call(this, str, startIndex) !== -1;
-    };
-}
 
 var inspired = inspired || {};
 

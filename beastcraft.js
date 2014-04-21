@@ -319,6 +319,59 @@ inspired.createMonster = function(token, monster) {
     token.set("height", size);
 }
 
+
+inspired.displayMonster = function(monsterName) {
+    bonify = function(number) {
+        if(number >= 0) return "+" + number;
+        else return number.toString();
+    }
+    savify = function(save) {
+        var s = bonify(save["bonus"]);
+        if(_.size(save["circumstantial"]) > 0) s += " (" + save["circumstantial"].join(",") + ")";
+        return s;
+    }
+
+    if(monsterName in state["inspired.BESTIARY"]) {
+        var monster = state["inspired.BESTIARY"][monsterName];
+        s = "";
+        s += "<b>" + monsterName.toProperCase() + " (CR " + monster["cr"] + ")</b><br/>";
+        s += "<b>XP " + monster["xp"] + "</b><br/>";
+        s += monster["alignment"].join(", ").toUpperCase() + " " + monster["size"].toProperCase() + 
+             " " + monster["type"];
+        if(_.size(monster["subtype"]) > 0) { s += " (" + monster["subtype"].join(", ") + ")"; }
+        s += "<br/>";
+        s += "<b>Init</b> " + bonify(monster["initiative"]) + "; <b>Senses</b> " + monster["senses"].join(", ") + "<br/>";
+        if(_.size(monster["auras"]) > 0) { s += "<b>Aura</b> " + monster["auras"].join(", ") + "<br/>"; }
+        s += "<br/><b>DEFENSE</b><br/>";
+        s += "<b>AC</b> " + monster["ac"]["normal"] + ", touch " + monster["ac"]["touch"] + ", flat-footed " + monster["ac"]["flat-footed"] + "<br/>";
+        s += "<b>hp</b> " + monster["hp"] + " (" + monster["hd"] + ")<br/>";
+        s += "<b>Fort</b> " + savify(monster["saves"]["fortitude"]) + 
+             ", <b>Ref</b> " + savify(monster["saves"]["reflex"]) + 
+             ", <b>Will</b> " + savify(monster["saves"]["will"]) + "<br/>";
+        var otherDefense = []
+        if(_.size(monster["dr"]) > 0) { otherDefense.push("<b>DR</b> " + monster["dr"].join(", ")); }
+        if(_.size(monster["immunities"]) > 0) { otherDefense.push("<b>Immune</b> " + monster["immunities"].join(", ")); }
+        if(_.size(monster["resistances"]) > 0) { otherDefense.push("<b>Resist</b> " + monster["resistances"].join(", ")); }
+        if(monster["sr"]["value"] > 0) { 
+            var sr = "<b>SR</b> " + monster["sr"]["value"];
+            if(monster["sr"]["versus"].length > 0) { sr += " (vs. " + monster["sr"]["versus"] + ")"; }
+            otherDefense.push(sr);
+        }
+        s += otherDefense.join("; ");
+        s += "<br/>";
+        s += "<br/><b>OFFENSE</b><br/>";
+        s += "<b>Speed</b> " + monster["speed"].join(", ") + "<br/>";
+        
+        
+        return s;
+    }
+    else {
+        return false;        
+    }
+}
+
+
+
 on("chat:message", function(msg) {
     if(msg.type != "api") return;
     if(msg.content.contains("!beastcraft ") && inspired.isGM(msg.playerid)) {
@@ -348,6 +401,16 @@ on("chat:message", function(msg) {
         }
         else {
             sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " <i>" + monsterName + "</i> is not a valid creature.");        
+        }
+    }
+    else if(msg.content.contains("!beastinfo ") && inspired.isGM(msg.playerid)) {
+        var monsterName = msg.content.replace("!beastinfo ", "").trim().toLowerCase();
+        var info = inspired.displayMonster(monsterName);
+        if(info === false) {
+            sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " <i>" + monsterName + "</i> is not a valid creature.");        
+        }
+        else {
+            sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " <br/>" + info);
         }
     }
 });

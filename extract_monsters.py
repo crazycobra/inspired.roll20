@@ -320,10 +320,10 @@ def get_from_html(s):
                     sp = remove_tags(sp).strip().lower()
                     if '(dc' in sp:
                         name, dc = sp.split('(dc')
-                        spell['name'] = name.strip().lower()
+                        spell['name'] = name.strip().lower().replace('*', '')
                         spell['dc'] = int(dc.replace(')', ' ').split()[0])
                     else:
-                        spell['name'] = sp.strip().lower()
+                        spell['name'] = sp.strip().lower().replace('*', '')
                     sks['spells'].append(spell)
         return sks
             
@@ -344,6 +344,7 @@ def get_from_html(s):
               'spellsknown': [],
               'cmb': {'bonus': 0, 'special': ''},
               'cmd': {'bonus': 0, 'special': ''},
+              'bab': 0,
               'specialabilities': [],
               'description': ''}
     bolds = find_bold_things(s)
@@ -398,6 +399,8 @@ def get_from_html(s):
             others['sla'] = pull_slas(bold['value'])
         elif bold['name'] == 'spells known':
             others['spellsknown'] = pull_spellsknown(bold['value'])
+        elif bold['name'] == 'base atk':
+            others['bab'] = int(remove_tags(bold['value']).replace('+', '').replace(';', ''))
         elif bold['name'] == 'cmb':
             parts = bold['value'].split('(')
             if len(parts) > 1:
@@ -441,6 +444,7 @@ if __name__ == '__main__':
                 name = row['Name'].strip().lower()
                 print(name)
                 monster = {}
+                monster['name'] = name
                 monster['cr'] = get_cr(row['CR'])
                 monster['xp'] = row['XP'].strip().lower()
                 monster['race'] = row['Race'].strip().lower()
@@ -488,16 +492,20 @@ if __name__ == '__main__':
         
         print('+++++++++++++++++++++++++++++++++++++++++++++')
         print(len(monsters))
+        pg = 0
         for gn, g in zip(groupings, groups):
-            with open('bestiary{:02d}.js'.format(gn), 'w') as bfile:
-                bfile.write('state["inspired.BESTIARY"] =\n')
+            with open('bestiary{:02d}{:02d}.js'.format(pg, gn), 'w') as bfile:
+                bfile.write('if(!("inspired.BESTIARY" in state)) { state["inspired.BESTIARY"] = {}; }\n')
+                bfile.write('_.extend(state["inspired.BESTIARY"], \n');
                 bfile.write(json.dumps(g, indent=3, separators=[',', ': '], sort_keys=True))
-                bfile.write(';')
+                bfile.write(');')
+                pg = gn + 1
         
         with open('bestiary.js', 'w') as bfile:
-            bfile.write('state["inspired.BESTIARY"] =\n')
+            bfile.write('if(!("inspired.BESTIARY" in state)) { state["inspired.BESTIARY"] = {}; }\n')
+            bfile.write('_.extend(state["inspired.BESTIARY"], \n');
             bfile.write(json.dumps(monsters, indent=3, separators=[',', ': '], sort_keys=True))
-            bfile.write(';')
+            bfile.write(');')
         
     ''' 
         lite_monster_names = ['barghest', 'dire bear', 'night hag']

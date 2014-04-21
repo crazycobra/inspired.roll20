@@ -28,7 +28,12 @@ if(!('contains' in String.prototype)) {
         return ''.indexOf.call(this, str, startIndex) !== -1;
     };
 }
-
+if(!('toProperCase' in String.prototype)) {
+    String.prototype.toProperCase = function() {
+      return this.toLowerCase().replace(/^(.)|\s(.)/g, 
+          function($1) { return $1.toUpperCase(); });
+    }
+}
 
 var inspired = inspired || {};
 
