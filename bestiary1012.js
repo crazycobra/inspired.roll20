@@ -1514,8 +1514,7 @@ _.extend(state["inspired.BESTIARY"],
       "feats": [
          "combat expertise",
          "greater trip",
-         "improved critcal (bite",
-         "claw)",
+         "improved critcal (bite, claw)",
          "improved initiative",
          "improved trip",
          "power attack",
@@ -2172,8 +2171,7 @@ _.extend(state["inspired.BESTIARY"],
          "cleave",
          "flyby attack",
          "great cleave",
-         "improved critical (bite",
-         "claws)",
+         "improved critical (bite, claws)",
          "iron will",
          "power attack"
       ],
@@ -3234,8 +3232,7 @@ _.extend(state["inspired.BESTIARY"],
          "improved natural armor",
          "lunge",
          "skill focus (stealth)",
-         "weapon focus (bite",
-         "claw)"
+         "weapon focus (bite, claw)"
       ],
       "hd": "14d12+70",
       "hp": 161,
@@ -4298,9 +4295,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "14d10+30",
       "hp": 107,
       "immunities": [
@@ -7397,9 +7392,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "16d8+64",
       "hp": 136,
       "immunities": [
@@ -8144,9 +8137,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "13d10+30",
       "hp": 101,
       "immunities": [
@@ -8305,9 +8296,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "16d10+30",
       "hp": 118,
       "immunities": [
@@ -10433,9 +10422,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "16d8+80",
       "hp": 152,
       "immunities": [
@@ -15999,9 +15986,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "15d8+75",
       "hp": 142,
       "immunities": [
@@ -16914,9 +16899,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "14d8+84",
       "hp": 147,
       "immunities": [
@@ -17530,9 +17513,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "15d8+54",
       "hp": 175,
       "immunities": [
@@ -20620,9 +20601,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 5,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "15d10+60",
       "hp": 142,
       "immunities": [
@@ -30088,8 +30067,7 @@ _.extend(state["inspired.BESTIARY"],
          "improved critical (bite)",
          "power attack",
          "staggering critical",
-         "weapon focus (bite",
-         "sting)"
+         "weapon focus (bite, sting)"
       ],
       "hd": "16d10+112",
       "hp": 200,
@@ -30227,9 +30205,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "15d8+90",
       "hp": 157,
       "immunities": [
@@ -31317,8 +31293,7 @@ _.extend(state["inspired.BESTIARY"],
          "improved critical (bite)",
          "improved initiative",
          "iron will",
-         "skill focus (perception",
-         "stealth)",
+         "skill focus (perception, stealth)",
          "weapon focus (strand)"
       ],
       "hd": "12d8+108",
@@ -32380,9 +32355,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "12d8+84",
       "hp": 138,
       "immunities": [
@@ -35894,9 +35867,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "14d10+30",
       "hp": 107,
       "immunities": [
@@ -36488,9 +36459,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "14d10+30",
       "hp": 107,
       "immunities": [
@@ -37259,9 +37228,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "13d10+40",
       "hp": 111,
       "immunities": [
@@ -37624,9 +37591,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "14d10+30",
       "hp": 107,
       "immunities": [
@@ -41253,8 +41218,7 @@ _.extend(state["inspired.BESTIARY"],
       "feats": [
          "combat expertise",
          "greater trip",
-         "improved critical (bite",
-         "claw)",
+         "improved critical (bite, claw)",
          "improved initiative",
          "improved trip",
          "power attack"

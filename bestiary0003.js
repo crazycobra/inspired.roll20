@@ -589,9 +589,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d10+15",
       "hp": 20,
       "immunities": [
@@ -1701,9 +1699,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d8",
       "hp": 9,
       "immunities": [
@@ -1825,9 +1821,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d8+6",
       "hp": 15,
       "immunities": [],
@@ -2158,9 +2152,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d10+20",
       "hp": 36,
       "immunities": [
@@ -3466,9 +3458,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8+12",
       "hp": 30,
       "immunities": [
@@ -5106,9 +5096,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d8",
       "hp": 4,
       "immunities": [
@@ -5222,9 +5210,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8+12",
       "hp": 30,
       "immunities": [
@@ -6992,9 +6978,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d8+6",
       "hp": 15,
       "immunities": [
@@ -9269,9 +9253,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d10+20",
       "hp": 36,
       "immunities": [
@@ -9962,9 +9944,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d8+9",
       "hp": 22,
       "immunities": [
@@ -10100,9 +10080,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d8+3",
       "hp": 16,
       "immunities": [
@@ -11672,9 +11650,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d8+12",
       "hp": 25,
       "immunities": [
@@ -13234,9 +13210,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8+8",
       "hp": 26,
       "immunities": [
@@ -14482,8 +14456,7 @@ _.extend(state["inspired.BESTIARY"],
          "special": ""
       },
       "feats": [
-         "skill focus (perception",
-         "stealth)"
+         "skill focus (perception, stealth)"
       ],
       "hd": "3d8+9",
       "hp": 22,
@@ -16009,9 +15982,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d8+6",
       "hp": 15,
       "immunities": [
@@ -17451,8 +17422,7 @@ _.extend(state["inspired.BESTIARY"],
          "special": ""
       },
       "feats": [
-         "skill focus (perception",
-         "stealth)"
+         "skill focus (perception, stealth)"
       ],
       "hd": "4d8+8",
       "hp": 26,
@@ -22947,9 +22917,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d8",
       "hp": 4,
       "immunities": [
@@ -23075,9 +23043,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d8+1",
       "hp": 5,
       "immunities": [
@@ -25640,9 +25606,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d8+6",
       "hp": 19,
       "immunities": [
@@ -25901,9 +25865,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8+32",
       "hp": 50,
       "immunities": [
@@ -26390,9 +26352,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d8+4",
       "hp": 13,
       "immunities": [
@@ -26837,9 +26797,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d8+3",
       "hp": 16,
       "immunities": [
@@ -26963,9 +26921,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d8+6",
       "hp": 19,
       "immunities": [
@@ -27077,9 +27033,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "5d8+15",
       "hp": 37,
       "immunities": [
@@ -27797,9 +27751,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d8+6",
       "hp": 19,
       "immunities": [
@@ -27925,9 +27877,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d8+2",
       "hp": 11,
       "immunities": [
@@ -28064,9 +28014,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "5d8+10",
       "hp": 32,
       "immunities": [
@@ -28337,9 +28285,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d8+1",
       "hp": 5,
       "immunities": [
@@ -28469,9 +28415,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d8+6",
       "hp": 15,
       "immunities": [
@@ -28963,9 +28907,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d8+2",
       "hp": 6,
       "immunities": [
@@ -29090,9 +29032,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d8+6",
       "hp": 19,
       "immunities": [
@@ -29235,9 +29175,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8+4",
       "hp": 22,
       "immunities": [
@@ -29390,9 +29328,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d8+3",
       "hp": 7,
       "immunities": [
@@ -29508,9 +29444,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8+12",
       "hp": 30,
       "immunities": [
@@ -29782,9 +29716,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8+16",
       "hp": 34,
       "immunities": [
@@ -29903,9 +29835,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "5d8+15",
       "hp": 37,
       "immunities": [
@@ -30046,9 +29976,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8+16",
       "hp": 34,
       "immunities": [
@@ -30507,9 +30435,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d8+4",
       "hp": 13,
       "immunities": [
@@ -30643,9 +30569,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d8+3",
       "hp": 16,
       "immunities": [
@@ -30784,9 +30708,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d8+4",
       "hp": 13,
       "immunities": [
@@ -31189,9 +31111,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8+16",
       "hp": 34,
       "immunities": [
@@ -31313,9 +31233,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d8+6",
       "hp": 19,
       "immunities": [
@@ -31585,9 +31503,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8+20",
       "hp": 38,
       "immunities": [
@@ -34840,9 +34756,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d8",
       "hp": 13,
       "immunities": [
@@ -35681,9 +35595,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8+16",
       "hp": 34,
       "immunities": [
@@ -38433,9 +38345,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "5d8+25",
       "hp": 47,
       "immunities": [
@@ -38565,9 +38475,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d8+4",
       "hp": 13,
       "immunities": [
@@ -39360,9 +39268,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d10+10",
       "hp": 15,
       "immunities": [
@@ -41881,9 +41787,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d8+1",
       "hp": 5,
       "immunities": [
@@ -44499,9 +44403,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d10+2",
       "hp": 13,
       "immunities": [
@@ -45937,9 +45839,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8",
       "hp": 18,
       "immunities": [
@@ -48443,9 +48343,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d8+8",
       "hp": 17,
       "immunities": [
@@ -51172,9 +51070,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "7d8",
       "hp": 31,
       "immunities": [
@@ -52051,9 +51947,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d10+20",
       "hp": 36,
       "immunities": [
@@ -53089,9 +52983,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d8",
       "hp": 4,
       "immunities": [
@@ -55772,9 +55664,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d8+4",
       "hp": 8,
       "immunities": [
@@ -62343,9 +62233,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d8+3",
       "hp": 7,
       "immunities": [
@@ -62645,9 +62533,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8+4",
       "hp": 22,
       "immunities": [
@@ -63223,9 +63109,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d8",
       "hp": 4,
       "immunities": [],
@@ -63565,9 +63449,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d8",
       "hp": 4,
       "immunities": [
@@ -66584,9 +66466,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d8",
       "hp": 9,
       "immunities": [
@@ -67154,9 +67034,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d8+15",
       "hp": 28,
       "immunities": [
@@ -69942,9 +69820,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d8",
       "hp": 9,
       "immunities": [
@@ -71499,9 +71375,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8+4",
       "hp": 22,
       "immunities": [
@@ -79801,9 +79675,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d8+12",
       "hp": 30,
       "immunities": [
@@ -80757,9 +80629,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "7d8",
       "hp": 31,
       "immunities": [
@@ -80888,9 +80758,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "2d8",
       "hp": 9,
       "immunities": [
@@ -81174,9 +81042,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "4d10+20",
       "hp": 42,
       "immunities": [
@@ -84387,9 +84253,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "1d8+4",
       "hp": 8,
       "immunities": [
@@ -84512,9 +84376,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "3d8+9",
       "hp": 22,
       "immunities": [],

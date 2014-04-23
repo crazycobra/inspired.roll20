@@ -21,6 +21,7 @@ state["inspired.BESTIARY"] =
          "frightful presence (300 ft., dc 27)",
          "slow"
       ],
+      "bab": 23,
       "class": [],
       "cmb": {
          "bonus": 36,
@@ -46,10 +47,9 @@ state["inspired.BESTIARY"] =
       "feats": [
          "combat expertise",
          "greater trip",
-         "improved critical (bite",
-         "claw)",
-         "improved",
-         "impproved initiative",
+         "improved critical (bite, claw)",
+         "improved disarm",
+         "improved initiative",
          "improved trip",
          "improved vital strike",
          "power attack",
@@ -120,6 +120,7 @@ state["inspired.BESTIARY"] =
             "weapon": "tail slap"
          }
       ],
+      "name": "ancient copper dragon",
       "organization": "solitary",
       "race": "",
       "ranged": [],
@@ -512,5 +513,475 @@ state["inspired.BESTIARY"] =
       "type": "dragon",
       "weaknesses": [],
       "xp": "102400"
-   }
+   },
+   "ancient gold dragon": {
+      "abilityscores": {
+         "cha": 24,
+         "con": 27,
+         "dex": 8,
+         "int": 24,
+         "str": 39,
+         "wis": 25
+      },
+      "ac": {
+         "flat-footed": 39,
+         "normal": 39,
+         "touch": 5
+      },
+      "alignment": [
+         "lg"
+      ],
+      "auras": [
+         "fire",
+         "frightful presence (300 ft., dc 30)"
+      ],
+      "bab": 26,
+      "class": [],
+      "cmb": {
+         "bonus": 44,
+         "special": ""
+      },
+      "cmd": {
+         "bonus": 53,
+         "special": "57 vs. trip"
+      },
+      "cr": "20",
+      "defensiveabilities": [],
+      "description": "Gold dragons are the epitome of virtue. Other metallic dragons revere their gold cousins as the agents of divine forces and the paragons of dragonkind, and often seek them for advice or aid.",
+      "dr": [
+         "15/magic"
+      ],
+      "environment": "warm plains",
+      "fasthealing": {
+         "amount": 0,
+         "special": ""
+      },
+      "feats": [
+         "alertness",
+         "critical focus",
+         "extend spell",
+         "improved critical (bite, claw, wing, tail)",
+         "iron will",
+         "multiattack",
+         "power attack",
+         "quicken spell",
+         "staggering critical",
+         "vital strike"
+      ],
+      "hd": "26d12+208",
+      "hp": 377,
+      "immunities": [
+         "fire",
+         "paralysis",
+         "sleep"
+      ],
+      "initiative": -1,
+      "languages": [
+         "celestial",
+         "common",
+         "draconic",
+         "5 more"
+      ],
+      "melee": [
+         {
+            "amount": 1,
+            "bonus": [
+               36
+            ],
+            "critmin": 19,
+            "critmult": 2,
+            "damage": "4d6+21",
+            "special": "",
+            "weapon": "bite"
+         },
+         {
+            "amount": 2,
+            "bonus": [
+               36
+            ],
+            "critmin": 19,
+            "critmult": 2,
+            "damage": "2d8+14",
+            "special": "",
+            "weapon": "claws"
+         },
+         {
+            "amount": 2,
+            "bonus": [
+               34
+            ],
+            "critmin": 19,
+            "critmult": 2,
+            "damage": "2d6+7",
+            "special": "",
+            "weapon": "wings"
+         },
+         {
+            "amount": 1,
+            "bonus": [
+               34
+            ],
+            "critmin": 19,
+            "critmult": 2,
+            "damage": "2d8+21",
+            "special": "",
+            "weapon": "tail"
+         }
+      ],
+      "name": "ancient gold dragon",
+      "organization": "solitary",
+      "race": "",
+      "ranged": [],
+      "reach": "15 ft. (20 ft. with bite)",
+      "regeneration": {
+         "amount": 0,
+         "overcome": ""
+      },
+      "resistances": [],
+      "saves": {
+         "fortitude": {
+            "bonus": 23,
+            "circumstantial": []
+         },
+         "reflex": {
+            "bonus": 14,
+            "circumstantial": []
+         },
+         "will": {
+            "bonus": 24,
+            "circumstantial": []
+         }
+      },
+      "senses": [
+         "dragon senses",
+         "perception +40"
+      ],
+      "size": "gargantuan",
+      "skills": {
+         "diplomacy": {
+            "bonus": 36,
+            "circumstantial": []
+         },
+         "fly": {
+            "bonus": 13,
+            "circumstantial": []
+         },
+         "heal": {
+            "bonus": 36,
+            "circumstantial": []
+         },
+         "knowledge (arcana, history, local, nobility, planes, religion)": {
+            "bonus": 36,
+            "circumstantial": []
+         },
+         "perception": {
+            "bonus": 40,
+            "circumstantial": []
+         },
+         "sense motive": {
+            "bonus": 40,
+            "circumstantial": []
+         },
+         "spellcraft": {
+            "bonus": 36,
+            "circumstantial": []
+         },
+         "swim": {
+            "bonus": 51,
+            "circumstantial": []
+         }
+      },
+      "sla": {
+         "abilities": [
+            {
+               "dc": NaN,
+               "frequency": "at will",
+               "name": "bless"
+            },
+            {
+               "dc": NaN,
+               "frequency": "at will",
+               "name": "daylight"
+            },
+            {
+               "dc": NaN,
+               "frequency": "at will",
+               "name": "detect evil"
+            },
+            {
+               "dc": NaN,
+               "frequency": "at will",
+               "name": "geas/quest"
+            },
+            {
+               "dc": 25,
+               "frequency": "at will",
+               "name": "sunburst"
+            }
+         ],
+         "casterlevel": 26,
+         "concentration": 0
+      },
+      "space": "20 ft.",
+      "specialabilities": [
+         {
+            "description": "A very young or older gold dragon can assume any animal or humanoid form three times per day as if using polymorph.",
+            "name": "change shape (su)"
+         },
+         {
+            "description": "A young or older gold dragon can detect gems three times per day. This functions as locate object, but can only be used to locate gemstones.",
+            "name": "detect gems (sp)"
+         },
+         {
+            "description": "Once a week, a great wyrm gold dragon can call upon celestial powers for aid. This functions as a miracle.",
+            "name": "divine aid (sp)"
+         },
+         {
+            "description": "A young or older gold dragon is treated as one size category larger when determining his fly speed.",
+            "name": "fast flight (ex)"
+         },
+         {
+            "description": "An old or older gold dragon is surrounded by an aura of fire. All creatures within 5 feet of the dragon take 1d6 points of fire damage at the beginning of the dragon's turn. An ancient gold dragon's aura extends to 10 feet. A great wyrm's damage increases to 2d6. The dragon can activate or suppress this aura as a free action.",
+            "name": "fire aura (su)"
+         },
+         {
+            "description": "Once per day an adult or older gold dragon can touch a gem, usually one embedded in the dragon's hide, and enspell it to bring good luck. As long as the dragon carries the gem, it and every good creature within a given radius of it (10 ft. per age category) receives a +1 luck bonus on all saving throws. If the dragon gives an enspelled gem to another creature, only that bearer gets the bonus. The effect lasts 1d3 hours plus 3 hours per age category of the dragon. This ability is the equivalent of a 2nd-level spell.",
+            "name": "luck (sp)"
+         },
+         {
+            "description": "A gold dragon gains the following spell-like abilities upon reaching the listed age category. Its caster level for these effects is equal to its Hit Dice, and any save DCs are Charisma-based. A gold dragon can use these abilities at will. Very young-detect evil; Juvenile-bless; Adult-daylight; Old-geas/quest; Ancient-sunburst; Great wyrm-foresight.",
+            "name": "spell-like abilities (sp)"
+         },
+         {
+            "description": "Instead of a cone of fire, a gold dragon can breathe a cone of weakening gas. Creatures within the cone must succeed on a Fortitude save or take 1 point of Strength damage per age category (Will save half ). <table> <tr><th>Age Category</th><th>Special Abilities</th><th>Caster Level*</th></tr> <tr><td>Wyrmling</td><td>Fire subtype, weakening breath</td><td>-</td></tr> <tr><td>Very young</td><td>Change shape, detect evil</td><td>-</td></tr> <tr><td>Young</td><td>Fast flight, detect gems</td><td>1st</td></tr> <tr><td>Juvenile</td><td>Bless</td><td>3rd</td></tr> <tr><td>Young adult</td><td>DR 5/magic, spell resistance</td><td>5th</td></tr> <tr><td>Adult</td><td>Frightful presence, luck, daylight</td><td>7th</td></tr> <tr><td>Mature adult</td><td>DR 10/magic</td><td>9th</td></tr> <tr><td>Old</td><td>Fire aura, geas/quest</td><td>11th</td></tr> <tr><td>Very old</td><td>DR 15/magic</td><td>13th</td></tr> <tr><td>Ancient</td><td>Sunburst</td><td>15th</td></tr> <tr><td>Wyrm</td><td>DR 20/magic</td><td>17th</td></tr> <tr><td>Great wyrm</td><td>Divine aid, foresight</td><td>19th</td></tr> <tr><td>* A gold dragon can cast cleric spells as arcane spells.</td></tr> </table> <br/>",
+            "name": "weakening breath (su)"
+         }
+      ],
+      "specialattacks": [
+         "breath weapon (60-ft. cone, dc 31, 20d10 fire)",
+         "crush",
+         "tail sweep",
+         "weaken breath"
+      ],
+      "speed": [
+         "60 ft.",
+         "fly 250 ft. (clumsy)",
+         "swim 60 ft."
+      ],
+      "spellsknown": {
+         "casterlevel": 15,
+         "concentration": 0,
+         "perday": [
+            {
+               "level": 7,
+               "number": 5
+            },
+            {
+               "level": 6,
+               "number": 7
+            },
+            {
+               "level": 5,
+               "number": 7
+            },
+            {
+               "level": 4,
+               "number": 7
+            },
+            {
+               "level": 3,
+               "number": 7
+            },
+            {
+               "level": 2,
+               "number": 8
+            },
+            {
+               "level": 1,
+               "number": 8
+            },
+            {
+               "level": 0,
+               "number": NaN
+            }
+         ],
+         "spells": [
+            {
+               "dc": NaN,
+               "level": 7,
+               "name": "greater teleport"
+            },
+            {
+               "dc": NaN,
+               "level": 7,
+               "name": "resurrection"
+            },
+            {
+               "dc": NaN,
+               "level": 6,
+               "name": "antimagic field"
+            },
+            {
+               "dc": NaN,
+               "level": 6,
+               "name": "greater dispel magic"
+            },
+            {
+               "dc": NaN,
+               "level": 6,
+               "name": "heal"
+            },
+            {
+               "dc": NaN,
+               "level": 5,
+               "name": "dispel evil"
+            },
+            {
+               "dc": NaN,
+               "level": 5,
+               "name": "plane shift"
+            },
+            {
+               "dc": NaN,
+               "level": 5,
+               "name": "teleport"
+            },
+            {
+               "dc": NaN,
+               "level": 5,
+               "name": "true seeing"
+            },
+            {
+               "dc": NaN,
+               "level": 4,
+               "name": "divination"
+            },
+            {
+               "dc": NaN,
+               "level": 4,
+               "name": "restoration"
+            },
+            {
+               "dc": NaN,
+               "level": 4,
+               "name": "spell immunity"
+            },
+            {
+               "dc": NaN,
+               "level": 4,
+               "name": "stoneskin"
+            },
+            {
+               "dc": NaN,
+               "level": 3,
+               "name": "dispel magic"
+            },
+            {
+               "dc": NaN,
+               "level": 3,
+               "name": "haste"
+            },
+            {
+               "dc": NaN,
+               "level": 3,
+               "name": "invisibility purge"
+            },
+            {
+               "dc": NaN,
+               "level": 3,
+               "name": "prayer"
+            },
+            {
+               "dc": NaN,
+               "level": 2,
+               "name": "aid"
+            },
+            {
+               "dc": NaN,
+               "level": 2,
+               "name": "cure moderate wounds"
+            },
+            {
+               "dc": NaN,
+               "level": 2,
+               "name": "lesser restoration"
+            },
+            {
+               "dc": NaN,
+               "level": 2,
+               "name": "resist energy"
+            },
+            {
+               "dc": NaN,
+               "level": 2,
+               "name": "silence"
+            },
+            {
+               "dc": NaN,
+               "level": 1,
+               "name": "alarm"
+            },
+            {
+               "dc": NaN,
+               "level": 1,
+               "name": "divine favor"
+            },
+            {
+               "dc": NaN,
+               "level": 1,
+               "name": "mage armor"
+            },
+            {
+               "dc": NaN,
+               "level": 1,
+               "name": "shield"
+            },
+            {
+               "dc": NaN,
+               "level": 1,
+               "name": "shield of faith"
+            },
+            {
+               "dc": NaN,
+               "level": 0,
+               "name": "detect magic"
+            },
+            {
+               "dc": NaN,
+               "level": 0,
+               "name": "light"
+            },
+            {
+               "dc": NaN,
+               "level": 0,
+               "name": "mending"
+            },
+            {
+               "dc": NaN,
+               "level": 0,
+               "name": "stabilize"
+            },
+            {
+               "dc": NaN,
+               "level": 0,
+               "name": "6 more"
+            }
+         ]
+      },
+      "sq": "change shape, detect gems, fast flight, luck",
+      "sr": {
+         "value": 31,
+         "versus": ""
+      },
+      "subtype": [
+         "fire"
+      ],
+      "treasure": "triple",
+      "type": "dragon",
+      "weaknesses": [
+         "vulnerability to cold"
+      ],
+      "xp": "307200"
+   },
+
 };

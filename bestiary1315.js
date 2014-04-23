@@ -920,8 +920,7 @@ _.extend(state["inspired.BESTIARY"],
          "multiattack",
          "power attack",
          "skill focus (diplomacy)",
-         "weapon focus (bite",
-         "claws)"
+         "weapon focus (bite, claws)"
       ],
       "hd": "16d12+80",
       "hp": 184,
@@ -1624,8 +1623,7 @@ _.extend(state["inspired.BESTIARY"],
          "alertness",
          "critical focus",
          "extend spell",
-         "improved critical (bite",
-         "claw)",
+         "improved critical (bite, claw)",
          "iron will",
          "multiattack",
          "power attack",
@@ -8862,9 +8860,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "24d8+120",
       "hp": 228,
       "immunities": [
@@ -9205,9 +9201,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "20d10+40",
       "hp": 150,
       "immunities": [
@@ -9569,9 +9563,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "16d8+112",
       "hp": 184,
       "immunities": [
@@ -9725,8 +9717,7 @@ _.extend(state["inspired.BESTIARY"],
          "spell penetration",
          "agathion",
          "avoral-agathion",
-         "cetaceal weapon focus (shortspear",
-         "tail slap)",
+         "cetaceal weapon focus (shortspear, tail slap)",
          "wind stance"
       ],
       "hd": "17d10+119",
@@ -16592,9 +16583,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "20d8+140",
       "hp": 230,
       "immunities": [
@@ -19123,9 +19112,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "18d10+30",
       "hp": 129,
       "immunities": [
@@ -22188,8 +22175,7 @@ _.extend(state["inspired.BESTIARY"],
       "feats": [
          "combat expertise",
          "greater trip",
-         "improved critical (bite",
-         "claw)",
+         "improved critical (bite, claw)",
          "improved initiative",
          "improved trip",
          "improved vital strike",
@@ -26498,8 +26484,7 @@ _.extend(state["inspired.BESTIARY"],
       "feats": [
          "combat expertise",
          "greater trip",
-         "improved critical (bite",
-         "claw)",
+         "improved critical (bite, claw)",
          "improved initiative",
          "improved trip",
          "improved vital strike",
@@ -30363,9 +30348,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 0,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "14d8+126",
       "hp": 189,
       "immunities": [
@@ -36454,9 +36437,7 @@ _.extend(state["inspired.BESTIARY"],
          "amount": 1,
          "special": ""
       },
-      "feats": [
-         ""
-      ],
+      "feats": [],
       "hd": "14d10+80",
       "hp": 157,
       "immunities": [
@@ -37547,8 +37528,7 @@ _.extend(state["inspired.BESTIARY"],
       "feats": [
          "alertness",
          "critical focus",
-         "improved critical (bite",
-         "claw)",
+         "improved critical (bite, claw)",
          "iron will",
          "multiattack",
          "power attack",

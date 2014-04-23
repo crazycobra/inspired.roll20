@@ -217,10 +217,15 @@ inspired.loadMonsterAbilities = function(monster, charid) {
     // Load defensive abilities (to be whispered on hit point change)...
     var da = "";
     if(_.size(monster["defensiveabilities"]) > 0) {
-        da += "<b>Defensive Abilities</b><ul><li>" + monster["defensiveabilities"].join("</li><li>") + "</li></ul><br/>";
+        da += "<b>Defensive Abilities</b><ul><li>" + monster["defensiveabilities"].join("</li><li>") + "</li></ul>";
     }
     if(_.size(monster["dr"]) > 0) {
-        da += "<b>Damage Reduction</b><ul><li>" + monster["dr"].join("</li><li>") + "</li></ul><br/>";
+        da += "<b>Damage Reduction</b><ul><li>" + monster["dr"].join("</li><li>") + "</li></ul>";
+    }
+    if(monster["sr"]["value"] > 0) {
+        da += "<b>SR</b> " + monster["sr"]["value"];
+        if(monster["sr"]["versus"].length > 0) { da += " (vs. " + monster["sr"]["versus"] + ")"; }
+        da += "<br/>";
     }
     if(monster["fasthealing"]["amount"] > 0) {
         da += "<b>Fast Healing</b>: " + monster["fasthealing"]["amount"];
@@ -237,13 +242,13 @@ inspired.loadMonsterAbilities = function(monster, charid) {
         da += "<br/>";
     }
     if(_.size(monster["Immunities"]) > 0) {
-        da += "<b>Immunities</b><ul><li>" + monster["immunities"].join("</li><li>") + "</li></ul><br/>";
+        da += "<b>Immunities</b><ul><li>" + monster["immunities"].join("</li><li>") + "</li></ul>";
     }
     if(_.size(monster["Resistances"]) > 0) {
-        da += "<b>Resistances</b><ul><li>" + monster["resistances"].join("</li><li>") + "</li></ul><br/>";
+        da += "<b>Resistances</b><ul><li>" + monster["resistances"].join("</li><li>") + "</li></ul>";
     }
     if(_.size(monster["weaknesses"]) > 0) {
-        da += "<b>Weaknesses</b><ul><li>" + monster["weaknesses"].join("</li><li>") + "</li></ul><br/>";
+        da += "<b>Weaknesses</b><ul><li>" + monster["weaknesses"].join("</li><li>") + "</li></ul>";
     }
     if(da.length > 0) {
         da = "<small>Defense information for " + monster["name"] + "<br/>" + da + "</small>";
@@ -321,14 +326,154 @@ inspired.createMonster = function(token, monster) {
 
 
 inspired.displayMonster = function(monsterName) {
+    ordinate = function(number) {
+        if(number == 1) return number + "st";
+        else if(number == 2) return number + "nd";
+        else if(number == 3) return number + "rd";
+        else return number + "th";
+    }
     bonify = function(number) {
         if(number >= 0) return "+" + number;
         else return number.toString();
     }
     savify = function(save) {
         var s = bonify(save["bonus"]);
-        if(_.size(save["circumstantial"]) > 0) s += " (" + save["circumstantial"].join(",") + ")";
+        if(_.size(save["circumstantial"]) > 0) {
+            var a = [];
+            _.each(save["circumstantial"], function(obj) {
+                var n = bonify(obj["bonus"]);
+                var t = obj["type"] + " ";
+                var c = obj["circumstance"];
+                if(obj["type"].length > 0) { n += " " + obj["type"]; }
+                if(obj["circumstance"].length > 0) { n += " vs. " + obj["circumstance"]; }
+                a.push(n);
+            });
+            s += " (" + a.join(", ") + ")";
+        }
         return s;
+    }
+    attackify = function(attacks) {
+        var a = [];
+        _.each(attacks, function(obj) {
+            var s = "";
+            if(obj["amount"] > 1) { s += obj["amount"] + " "; }
+            s += obj["weapon"] + " ";
+            var bonus = [];
+            _.each(obj["bonus"], function(b) {
+                bonus.push(bonify(b));
+            });
+            s += bonus.join("/");
+            s += " (" + obj["damage"];
+            if(obj["critmin"] < 20 || obj["critmult"] > 2) { s += "/"; }
+            if(obj["critmin"] < 20) { s += obj["critmin"] + "-20 "; }
+            if(obj["critmult"] > 2) { s += "x" + obj["critmult"] + " "; }
+            if(obj["special"].length > 0) { s = s.trim(); s += " plus " + obj["special"]; }
+            s = s.trim();
+            s += ")";
+            a.push(s);
+        });
+        return a.join(", ");
+    }
+    slaify = function(sla) {
+        var s = "<b>Spell-Like Abilities</b> (CL " + sla["casterlevel"] + ")<br/>";
+        sla["abilities"].sort(function(a, b) {
+            if(a["frequency"] == b["frequency"]) return a["name"].localeCompare(b["name"]);
+            else if(a["frequency"] == "constant") return 1;
+            else if(b["frequency"] == "constant") return -1;
+            else if(a["frequency"] == "at will") return 1;
+            else if(b["frequency"] == "at will") return -1;
+            else {
+                var af = parseInt(a["frequency"].split("/")[0]);
+                var bf = parseInt(a["frequency"].split("/")[0]);
+                return af > bf;
+            }
+        });
+        var a = [];
+        var currFreq = "";
+        _.each(sla["abilities"], function(obj) {
+            if(currFreq.length == 0) {
+                currFreq = obj["frequency"];
+                a.push([currFreq]);
+            }
+            else if(currFreq != obj["frequency"]) {
+                currFreq = obj["frequency"];
+                a.push([currFreq]);
+            }
+            var n = obj["name"];
+            if(!_.isNaN(obj["dc"])) { n += " (DC " + obj["dc"] + ")"; }
+            a[a.length-1].push(n);
+        });
+        _.each(a, function(obj) {
+            s += obj[0] + "--" + obj.slice(1).join(", ") + "<br/>";
+        });
+        return s;
+    }
+    skify = function(spellsknown) {
+        var s = "<b>Spells Known</b> (CL " + spellsknown["casterlevel"] + ")<br/>";
+        var sk = [];
+        spellsknown["perday"].sort(function(a, b) {
+            return a["level"] < b["level"];
+        });
+        spellsknown["spells"].sort(function(a, b) {
+            if(a["level"] == b["level"]) return a["name"].localeCompare(b["name"]);
+            else return a["level"] < b["level"];
+        });
+        _.each(spellsknown["perday"], function(a) {
+            s += ordinate(a["level"]) + " (";
+            if(_.isNaN(a["number"])) { s += "at will"; }
+            else { s += a["number"] + "/day"; }
+            s += ")--";
+            var spells = [];
+            _.each(spellsknown["spells"], function(b) {
+                if(b["level"] == a["level"]) {
+                    var n = b["name"];
+                    if(!_.isNaN(b["dc"])) { n += " (DC " + b["dc"] + ")"; }
+                    spells.push(n);
+                }
+            });
+            s += spells.join(", ") + "<br/>";
+        });
+        return s;
+    }
+    abilify = function(abilities) {
+        var s = [];
+        var a = ["str", "dex", "con", "int", "wis", "cha"];
+        _.each(a, function(name) {
+            var x = "<b>" + name.toProperCase() + "</b> ";
+            if(_.isNaN(abilities[name])) { x += "--"; }
+            else { x += abilities[name]; }
+            s.push(x);
+        });
+        return s.join(", ");
+    }
+    featify = function(feats) {
+        var properfeats = [];
+        _.each(feats, function(f) {
+            properfeats.push(f.toProperCase());
+        });
+        return properfeats.join(", ");
+    }
+    skillify = function(skills) {
+        var sorted = [];
+        _.each(skills, function(value, key) {
+            sorted.push(key);
+        });
+        sorted.sort();
+        var s = [];
+        _.each(sorted, function(value) {
+            var n = value.toProperCase() + " " + bonify(skills[value]["bonus"]);
+            if(skills[value]["circumstantial"].length > 0) { n += " (" + skills[value]["circumstantial"] + ")"; }
+            s.push(n);
+        });
+        return s.join(", ");
+    }
+    saify = function(sa) {
+        var s = [];
+        _.each(sa, function(obj) {
+            var n = "<b>" + obj["name"].toProperCase() + "</b> " + obj["description"];
+            s.push(n);
+        });
+        return s.join("<br/>");
     }
 
     if(monsterName in state["inspired.BESTIARY"]) {
@@ -359,10 +504,30 @@ inspired.displayMonster = function(monsterName) {
         }
         s += otherDefense.join("; ");
         s += "<br/>";
+        if(_.size(monster["weaknesses"]) > 0) { s += "<b>Weaknesses</b> " + monster["weaknesses"].join(", ") + "<br/>"; }
         s += "<br/><b>OFFENSE</b><br/>";
         s += "<b>Speed</b> " + monster["speed"].join(", ") + "<br/>";
-        
-        
+        if(_.size(monster["melee"]) > 0) { s += "<b>Melee</b> " + attackify(monster["melee"]) + "<br/>"; }
+        if(_.size(monster["ranged"]) > 0) { s += "<b>Ranged</b> " + attackify(monster["ranged"]) + "<br/>"; }
+        s += "<b>Space</b> " + monster["space"] + "; <b>Reach</b> " + monster["reach"] + "<br/>";
+        if(_.size(monster["specialattacks"]) > 0) { s += "<b>Special Attacks</b> " + monster["specialattacks"].join(", ").replace("dc ", "DC ") + "<br/>"; }
+        if(_.size(monster["sla"]) > 0) { s += slaify(monster["sla"]); }
+        if(_.size(monster["spellsknown"]) > 0) { s += skify(monster["spellsknown"]); } 
+        s += "<br/><b>STATISTICS</b><br/>";
+        s += abilify(monster["abilityscores"]) + "<br/>";
+        s += "<b>Base Atk</b> " + bonify(monster["bab"]) + "; <b>CMB</b> ";
+        s += bonify(monster["cmb"]["bonus"]);
+        if(monster["cmb"]["special"].length > 0) { s += " (" + monster["cmb"]["special"] + ")"; }
+        s += "; <b>CMD</b> " + monster["cmd"]["bonus"];
+        if(monster["cmd"]["special"].length > 0) { s += " (" + monster["cmd"]["special"] + ")"; }
+        s += "<br/>";
+        if(_.size(monster["feats"]) > 0) { s += "<b>Feats</b> " + featify(monster["feats"]) + "<br/>"; }
+        if(_.size(monster["skills"]) > 0) { s += "<b>Skills</b> " + skillify(monster["skills"]) + "<br/>"; }
+        if(_.size(monster["languages"]) > 0) { s += "<b>Languages</b> " + monster["languages"].join(", ") + "<br/>"; }
+        if(_.size(monster["specialabilities"]) > 0) {
+            s += "<br/><b>SPECIAL ABILITIES</b><br/>";
+            s += saify(monster["specialabilities"]);
+        }
         return s;
     }
     else {

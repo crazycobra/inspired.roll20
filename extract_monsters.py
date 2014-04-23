@@ -160,6 +160,15 @@ def get_skills(s):
         skills[skill_name] = skill
     return skills
     
+def get_feats(s):
+    feats = []
+    split_by_external_commas = re.compile(r'(?:[^,(]|\([^)]*\))+')
+    s = s.strip().lower()
+    matches = split_by_external_commas.findall(s)
+    for match in matches:
+        feats.append(match.strip().lower())
+    return feats
+    
 def get_ability_scores(s):
     scores = {'str': 0, 'dex': 0, 'con': 0, 'int': 0, 'wis': 0, 'cha': 0}
     ability_scores = s.split(',')
@@ -462,7 +471,7 @@ if __name__ == '__main__':
                 monster['space'] = row['Space'].strip().lower()
                 monster['reach'] = row['Reach'].strip().lower()
                 monster['abilityscores'] = get_ability_scores(row['AbilityScores'])
-                monster['feats'] = [f.strip().lower() for f in row['Feats'].split(',')]
+                monster['feats'] = get_feats(row['Feats'])#[f.strip().lower() for f in row['Feats'].split(',')]
                 monster['skills'] = get_skills(row['Skills'])
                 monster['languages'] = [l.strip().lower() for l in row['Languages'].split(';')[0].split(',') if len(l.strip()) > 0]
                 monster['sq'] = row['SQ'].strip().lower()
