@@ -677,7 +677,7 @@ inspired.registerSpellorb = function(characterId) {
             return "Spellorb assigned to " + character.get("name") + ".";
         }
         else {
-            return "No token assigned to " + character.get("name") + ".";
+            return "No token assigned to " + character.get("name") + " on player page.";
         }
     }
     else {
@@ -760,7 +760,7 @@ on("chat:message", function(msg) {
             var returnMessage = inspired.registerSpellorb(character.get("_id"));
             sendChat("Roll20", "/w " + msg.who.split(" ")[0] + " " + returnMessage);
             var spellorb = inspired.getSpellorb(character.get("_id"));
-            if(spellorb !== null) {
+            if(!_.isUndefined(spellorb)) {
                 sendPing(spellorb.get("left"), spellorb.get("top"), spellorb.get("_pageid"));
             }
         }
