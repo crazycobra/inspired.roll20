@@ -625,7 +625,7 @@ on("chat:message", function(msg) {
     }
 });
    
-   
+
 on("change:campaign:turnorder", function(obj) {
     // If we're not using the turn tracker, then our options are limited,
     // so just ignore this option.
@@ -637,7 +637,7 @@ on("change:campaign:turnorder", function(obj) {
     if(_.size(turnorder) > 0) {
         var topid = turnorder[0]["id"];
         // Is the top element controlled by the GM?
-        var token = getObj("token", topid);
+        var token = getObj("graphic", topid);
         if(inspired.isControlledByGM(token)) {
             if(token.get("represents").length > 0) {
                 var c = getObj("character", obj.get("represents"));
